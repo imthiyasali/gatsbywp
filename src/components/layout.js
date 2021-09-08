@@ -20,27 +20,31 @@ const Layout = ({ isHomePage, children }) => {
 
   return (
     <div className="global-wrapper" data-is-root-path={isHomePage}>
-      <header className="global-header">
-        {isHomePage ? (
-          <h1 className="main-heading">
-            <Link to="/">{parse(title)}</Link>
-          </h1>
-        ) : (
-          <Link className="header-link-home" to="/">
-            {title}
-          </Link>
-        )}
-      </header>
+      
+      <div  className="headers">
+            
+          <img src={'https://websitelearners.com/content/uploads/2016/09/logo.svg'} style={{height:40}} alt="Logo" />
+          <div className="headerright">
+          <p className="headerrighttext">Courses</p>
+          <p className="headerrighttext">Shop</p>
+          <p className="headerrighttext">Tools</p>
+          <p className="headerrighttext">Comapny</p>
+          </div>
+
+
+      </div>
+
+
+ <div   >
+            
+         <h1 className="headerstxt" >Blog</h1>
+
+      </div>
+
+
 
       <main>{children}</main>
-
-      <footer>
-        © {new Date().getFullYear()}, Built with
-        {` `}
-        <a href="https://www.gatsbyjs.com">Gatsby</a>
-        {` `}
-        And <a href="https://wordpress.org/">WordPress</a>
-      </footer>
+ 
     </div>
   )
 }

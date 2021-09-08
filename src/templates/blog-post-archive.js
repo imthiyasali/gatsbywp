@@ -1,10 +1,11 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
 import parse from "html-react-parser"
-
+ 
 import Bio from "../components/bio"
 import Layout from "../components/layout"
 import Seo from "../components/seo"
+import Image from "gatsby-image"
 
 const BlogIndex = ({
   data,
@@ -28,12 +29,13 @@ const BlogIndex = ({
   return (
     <Layout isHomePage>
       <Seo title="All posts" />
-
-      <Bio />
+    
+       
 
       <ol style={{ listStyle: `none` }}>
         {posts.map(post => {
           const title = post.title
+
 
           return (
             <li key={post.uri}>
@@ -42,15 +44,28 @@ const BlogIndex = ({
                 itemScope
                 itemType="http://schema.org/Article"
               >
+
+              {post.featuredImage?.node?.localFile?.childImageSharp?.fluid && (
+               <Image
+              fluid={post.featuredImage?.node?.localFile?.childImageSharp?.fluid}
+             
+              style={{ marginBottom: 50 }}
+            />
+            )}
+
+
                 <header>
+
+                <small>{post.date}</small>
                   <h2>
+                   
                     <Link to={post.uri} itemProp="url">
-                      <span itemProp="headline">{parse(title)}</span>
+                      <span className='posttitle' itemProp="headline">{parse(title)}</span>
                     </Link>
                   </h2>
-                  <small>{post.date}</small>
+                  
                 </header>
-                <section itemProp="description">{parse(post.excerpt)}</section>
+                <section className='par' itemProp="description">{parse(post.excerpt)}</section>
               </article>
             </li>
           )
@@ -82,6 +97,18 @@ export const pageQuery = graphql`
         uri
         date(formatString: "MMMM DD, YYYY")
         title
+        featuredImage {
+        node {
+          altText
+          localFile {
+            childImageSharp {
+              fluid(maxWidth: 1000, quality: 100) {
+                ...GatsbyImageSharpFluid_tracedSVG
+              }
+            }
+          }
+        }
+      }
         excerpt
       }
     }

@@ -35,8 +35,8 @@ const BlogPostTemplate = ({ data: { previous, next, post } }) => {
 
           <p>{post.date}</p>
 
-          {/* if we have a featured image for this post let's display it */}
-          {featuredImage?.fluid && (
+
+           {featuredImage?.fluid && (
             <Image
               fluid={featuredImage.fluid}
               alt={featuredImage.alt}
@@ -51,9 +51,7 @@ const BlogPostTemplate = ({ data: { previous, next, post } }) => {
 
         <hr />
 
-        <footer>
-          <Bio />
-        </footer>
+       
       </article>
 
       <nav className="blog-post-nav">
